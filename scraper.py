@@ -16,20 +16,22 @@ f2_odds = []
 
 def scrape_data():
     # set up page to extract table
-    data = requests.get("https://www.bestfightodds.com/#")
+    data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
+    < table
 
-    table = soup.find('table', {"odds-table"})
+    class ="at-12 standard-list" data-ng-init="MainController.mainNav.hideCouponRows = {};" >
+    table = soup.find('table', {"at-12 standard-list" })
 
     for table in table:
 
-        fighter = table.find_all("th", {"row"})
+        fighter = table.find_all("td", {"all-odds-click"})
 
         f1.append(fighter[0].text)
         f2.append(fighter[1].text)
 
 
-        odds = table.find_all('a', {"but-sg"})
+        odds = table.find_all('td', {"basket-add"})
 
 
         f1_odds.append(odds[0].text)

@@ -21,12 +21,12 @@ def scrape_data():
 
     table = soup.find('table', {"at-12 standard-list"})
 
-    fighter = table.find_all('class', {"fixtures-bet-name beta-footnote"})
+    fighter = table.find_all('p class', {"fixtures-bet-name beta-footnote"})
 
     f1.append(fighter[0].text)
     f2.append(fighter[1].text)
 
-    odds = table.find_all('class', {"odds beta-footnote bold add-to-bet-basket"})
+    odds = table.find_all('span class', {"odds beta-footnote bold add-to-bet-basket"})
 
     f1_odds.append(odds[0].text)
     f2_odds.append(odds[1].text)

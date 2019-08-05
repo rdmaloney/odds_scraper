@@ -18,9 +18,7 @@ def scrape_data():
     # set up page to extract table
     data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
-    < table
-
-    class ="at-12 standard-list" data-ng-init="MainController.mainNav.hideCouponRows = {};" >
+   
     table = soup.find('table', {"at-12 standard-list" })
 
     for table in table:

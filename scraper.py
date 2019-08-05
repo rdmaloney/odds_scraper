@@ -19,23 +19,22 @@ def scrape_data():
     data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
 
-    table = soup.find('table', {"at-12 standard-list"})
+    table = soup.find('table', {'at-12 standard-list'})
 
-    for row in table:
 
-        fighter = table.find_all("p", {"fixtures-bet-name beta-footnote"})
+    fighter = table.find_all("p", {'class': 'fixtures-bet-name beta-footnote'})
 
-        f1.append(fighter[0].text)
-        f2.append(fighter[1].text)
-
+    f1.append(fighter[0].text)
+    f2.append(fighter[1].text)
 
 
 
-        odds = table.find_all('span', {"odds beta-footnote bold add-to-bet-basket"})
+
+    odds = table.find_all('span', {'class': 'odds beta-footnote bold add-to-bet-basket'})
 
 
-        f1_odds.append(odds[0].text)
-        f2_odds.append(odds[1].text)
+    f1_odds.append(odds[0].text)
+    f2_odds.append(odds[1].text)
 
 
     return None

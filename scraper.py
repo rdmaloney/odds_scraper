@@ -21,7 +21,7 @@ def scrape_data():
    
     table = soup.find('table', {"at-12 standard-list" })
 
-    for table in table:
+    for tables in table:
 
         fighter = table.find_all("td", {"all-odds-click"})
 

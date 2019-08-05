@@ -19,7 +19,7 @@ def scrape_data():
     data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
 
-    table = table.find('table', {"at-12 standard-list"})
+    table = soup.find('table', {"at-12 standard-list"})
 
     fighter = table.find_all('p class', {"fixtures-bet-name beta-footnote"})
 

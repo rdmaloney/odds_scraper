@@ -1,24 +1,52 @@
-# This is a template for a Python scraper on morph.io (https://morph.io)
-# including some code snippets below that you should find helpful
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import numpy as np
+import string
+import re
+import datetime
+import sqlite3
+import time
+import os
 
-# import scraperwiki
-# import lxml.html
-#
-# # Read in a page
-# html = scraperwiki.scrape("http://foo.com")
-#
-# # Find something on the page using css selectors
-# root = lxml.html.fromstring(html)
-# root.cssselect("div[align='left']")
-#
-# # Write out to the sqlite database using scraperwiki library
-# scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
-#
-# # An arbitrary query against the database
-# scraperwiki.sql.select("* from data where 'name'='peter'")
+f1 = []
+f2 = []
+f1_odds = []
+f2_odds = []
 
-# You don't have to do things with the ScraperWiki and lxml libraries.
-# You can use whatever libraries you want: https://morph.io/documentation/python
-# All that matters is that your final data is written to an SQLite database
-# called "data.sqlite" in the current working directory which has at least a table
-# called "data".
+def scrape_data():
+    # set up page to extract table
+    data = requests.get("https://www.oddschecker.com/ufc-mma")
+    soup = BeautifulSoup(data.text, 'html.parser')
+
+    table = soup.find('table', {"at-12 standard-list"})
+
+    fighter = table.find_all('p', {"fixtures-bet-name beta-footnote"})
+
+    f1.append(fighter[0].text)
+    f2.append(fighter[1].text)
+
+    odds = table.find_all('span', {"odds beta-footnote bold add-to-bet-basket"})
+
+    f1_odds.append(odds[0].text)
+    f2_odds.append(odds[1].text)
+
+
+    return None
+
+def create_df():
+    df = pd.DataFrame()
+    df["Fighter1"]= f1
+    df["Fighter1_Odds"] = f1_odds
+    df["Fighter2"]= f2
+    df["Fighter2_Odds"]= f2_odds
+
+    return df
+
+scrape_data()
+df = create_df()
+
+conn = sqlite3.connect('data.sqlite')
+df.to_sql('data', conn, if_exists='replace')
+print('Db successfully constructed and saved')
+conn.close()

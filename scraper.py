@@ -1,3 +1,19 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import numpy as np
+import string
+import re
+import datetime
+import sqlite3
+import time
+import os
+
+f1 = []
+f2 = []
+f1_odds = []
+f2_odds = []
+
 def scrape_data():
     # set up page to extract table
     data = requests.get("https://www.oddschecker.com/ufc-mma")

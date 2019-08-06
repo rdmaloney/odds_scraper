@@ -20,15 +20,17 @@ def scrape_data():
     soup = BeautifulSoup(data.text, 'html.parser')
 
     table = soup.find('table', {'at-12 standard-list'})
+    
+    for row in table:
 
 
-    fighter = table.find_all("td", {'class': 'all-odds-click'})
+        fighter = table.find_all("td", {'class': 'all-odds-click'})
 
-    c=fighter[0].text.strip()
-    d=fighter[1].text.strip
+        c=fighter[0].text.strip()
+        d=fighter[1].text.strip
 
-    f1.append(c)
-    f2.append(d)
+        f1.append(c)
+        f2.append(d)
 
 
 

@@ -22,7 +22,7 @@ def scrape_data():
     table = soup.find('table', {'at-12 standard-list'})
 
 
-    fighter = table.find_all("p", {'class': 'fixtures-bet-name beta-footnote'})
+    fighter = table.find_all("td", {'class': 'all-odds-click'})
 
     c=fighter[0].text.strip()
     d=fighter[1].text.strip

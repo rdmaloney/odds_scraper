@@ -16,6 +16,7 @@ f2_odds = []
 header = []
 table_div = []
 top = []
+fighter = []
 
 
 def scrape_data():
@@ -26,13 +27,9 @@ def scrape_data():
     h1 = soup.find('h1')
     header.append(h1.text)
 
-    table_div = soup.find('div', {'class': 'content-4'})
+    table_div = soup.find('div', {'class': 'page-center-container'})
 
-    table = table_div.find('table', {'class': 'all-odds-click'})
-
-    top = table.find_all('tr', {'class': 'hda-header'})
-
-    fighter = table.find_all('td', {'class': 'all-odds-click'})
+    fighter = table_div.find_all('td', {'class': 'all-odds-click'})
 
     c = fighter[0].text.strip()
     d = fighter[1].text.strip()

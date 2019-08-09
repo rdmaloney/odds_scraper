@@ -14,6 +14,7 @@ f2 = []
 f1_odds = []
 f2_odds = []
 header = []
+table_div = []
 
 def scrape_data():
     # set up page to extract table
@@ -21,7 +22,7 @@ def scrape_data():
     soup = BeautifulSoup(data.text, 'html.parser')
     
     h1 = soup.find ('h1')
-    header.append(h1.text
+    header.append(h1.text)
     
     table_div = soup.find ('div' , {'class' : 'content-4'})
 

@@ -19,11 +19,11 @@ def scrape_data():
     data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
 
-    table = soup.find('table')
+    table = soup.find('table' , {'class': 'all-odds-click'})
 
+    header =table.find_all('tr' , {'class': 'hda-header'})
 
-
-    fighter = table.find_all("td", {'class': 'all-odds-click'})
+    fighter = table.find_all('td', {'class': 'all-odds-click'})
 
     c=fighter[0].text.strip()
     d=fighter[1].text.strip()

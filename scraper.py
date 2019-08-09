@@ -18,8 +18,10 @@ def scrape_data():
     # set up page to extract table
     data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
+    
+    table_div = soup.find ('div' , {'class' : 'content-4'})
 
-    table = soup.find('table' , {'class': 'all-odds-click'})
+    table = table_div.find('table' , {'class': 'all-odds-click'})
 
     header =table.find_all('tr' , {'class': 'hda-header'})
 

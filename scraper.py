@@ -27,7 +27,7 @@ def scrape_data():
     h1 = soup.find('h1')
     header.append(h1.text)
 
-    table_div = soup.find('div', {'class': 'page-center-container'})
+    table_div = soup.find('div', {'id': 'page-center-container'})
 
     fighter = table_div.find_all('td', {'class': 'all-odds-click'})
 

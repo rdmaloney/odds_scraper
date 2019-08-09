@@ -13,11 +13,15 @@ f1 = []
 f2 = []
 f1_odds = []
 f2_odds = []
+header = []
 
 def scrape_data():
     # set up page to extract table
     data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
+    
+    h1 = soup.find ('h1')
+    header.append(h1.text
     
     table_div = soup.find ('div' , {'class' : 'content-4'})
 

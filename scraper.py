@@ -11,6 +11,7 @@ import os
 
 links = []
 alphabets = sorted(set(string.ascii_lowercase))
+
 f1 = []
 f2 = []
 f1_odds = []
@@ -19,13 +20,14 @@ f2_odds = []
 
 def scrape_data():
     data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
-        soup = BeautifulSoup(data.text, 'html.parser')
-        links = soup.find_all('a',{'class': 'btmarket__name btmarket__name--featured'} href=True)
+    soup = BeautifulSoup(data.text, 'html.parser')
+    links = soup.find_all('a',{'class': 'btmarket__name btmarket__name--featured'} href=True)
+
+    for link in links:
+        
+        links.append(link.get('href'))
 
         for link in links:
-            all_links.append(link.get('href'))
-
-        for link in all_links:
             print(f"Now currently scraping link: {link}")
 
             data = requests.get(link)

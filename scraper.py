@@ -26,6 +26,8 @@ def scrape_data():
     for row in rows:
         print(f"Now currently scraping row: {row}")
         time.sleep(1)
+        
+        fighters = []
 
         fighters = row.find_all('p', {"class": "fixtures-bet-name beta-footnote"})
 

@@ -18,18 +18,16 @@ f2_odds = []
 def scrape_data():
     data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
     soup = BeautifulSoup(data.text, 'html.parser')
-    
+
     fights = []
 
     fights = soup.find_all('div', {"class": "btmarket"})
 
     for fight in fights:
-        print(f"Now currently scraping row: {row}")
+        print(f"Now currently scraping row: {fight}")
         time.sleep(1)
-        
-        fighters = []
 
-        fighters = fight.find_all('div' {class:"btmarket__link-name btmarket__link-name--2-rows"})
+        fighters = fight.find_all('div', {'class':"btmarket__link-name btmarket__link-name--2-rows"})
         c = fighters[0].text.strip()
         d = fighters[1].text.strip()
 

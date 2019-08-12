@@ -41,7 +41,7 @@ def scrape_data():
             f1.append(c)
             f2.append(d)
 
-            odds = soup.find_all('button', {'class': "btn betbutton oddsbutton"})
+            odds = soup.find_all('span', {'class': "betbutton_odds"})
 
             a = odds[0].text.strip()
             b = odds[1].text.strip()

@@ -9,6 +9,9 @@ import sqlite3
 import time
 import os
 
+
+links = []
+alphabets = sorted(set(string.ascii_lowercase))
 f1 = []
 f2 = []
 f1_odds = []
@@ -16,25 +19,40 @@ f2_odds = []
 
 
 def scrape_data():
-    data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
-    soup = BeautifulSoup(data.text, 'html.parser')
+    for alpha in alphabets:
+        links.append(https://sports.williamhill.com/betting/en-gb/ufc"")
 
-    fights = []
+        # now that we have a list of links we need to iterate it with BeautifulSoup
+    for link in links:
+        print(f"Currently on this link: {link}")
 
-    fights = soup.find_all('div', {"class": "btmarket"})
+        data = requests.get(link)
+        soup = BeautifulSoup(data.text, 'html.parser')
+        names = soup.find_all('a', {'class': 'btmarket__name btmarket__name--featured'}, href=True) 
+        
+       
+    # list to store url page of fighters
+        fighters = []
 
-    for fight in fights:
-        print(f"Now currently scraping row: {fight}")
-        time.sleep(1)
+        for name in names:
+            fighters.append(name['href'])
 
-        fighters = fight.find_all('div', {'class':"btmarket__link-name btmarket__link-name--2-rows"})
+        fighters = sorted(set(fighters))
+
+        for fighter in fighters:
+            data = requests.get(fighter)
+            soup = BeautifulSoup(data.text, 'html.parser')
+            time.sleep(2)
+
+        
+        fighters = soup.find('p', {'class':"btmarket__name"})
         c = fighters[0].text.strip()
         d = fighters[1].text.strip()
 
         f1.append(c)
         f2.append(d)
 
-        odds = fight.find_all('div', {'class': "btmarket_actions"})
+        odds = fight.find('button', {'class': "btn betbutton oddsbutton"})
 
         a = odds[0].text.strip()
         b = odds[1].text.strip()

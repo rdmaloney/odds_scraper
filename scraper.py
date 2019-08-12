@@ -16,28 +16,27 @@ f2_odds = []
 
 
 def scrape_data():
-    data = requests.get("https://www.oddschecker.com/ufc-mma")
+    data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
     soup = BeautifulSoup(data.text, 'html.parser')
+    
+    fights = []
 
-    table = soup.find('table', {"class": "at-12 standard-list"})
+    fights = soup.find_all('div', {"class": "btmarket"})
 
-    rows = soup.find_all('tr')
-
-    for row in rows:
+    for fight in fights:
         print(f"Now currently scraping row: {row}")
         time.sleep(1)
         
         fighters = []
 
-        fighters = soup.find_all('p', {"class": "fixtures-bet-name beta-footnote"})
-
+        fighters = fight.find_all('div' {class:"btmarket__link-name btmarket__link-name--2-rows"})
         c = fighters[0].text.strip()
         d = fighters[1].text.strip()
 
         f1.append(c)
         f2.append(d)
 
-        odds = soup.find_all('span', {'class': "odds beta-footnote bold add-to-bet-basket"})
+        odds = fight.find_all('div', {'class': "btmarket_actions"})
 
         a = odds[0].text.strip()
         b = odds[1].text.strip()

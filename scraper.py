@@ -18,29 +18,19 @@ f2_odds = []
 
 
 def scrape_data():
-    for alpha in alphabets:
-        links.append("https://sports.williamhill.com/betting/en-gb/ufc")
+    data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
+        soup = BeautifulSoup(data.text, 'html.parser')
+        links = soup.find_all('a',{'class': 'btmarket__name btmarket__name--featured'} href=True)
 
-        # now that we have a list of links we need to iterate it with BeautifulSoup
         for link in links:
-            print(f"Currently on this link: {link}")
+            all_links.append(link.get('href'))
+
+        for link in all_links:
+            print(f"Now currently scraping link: {link}")
 
             data = requests.get(link)
             soup = BeautifulSoup(data.text, 'html.parser')
-            names = soup.find_all('a', {'class': 'btmarket__name btmarket__name--featured'}, href=True)
-
-            # list to store url page of fighters
-            fighters = []
-
-            for name in names:
-                fighters.append(name['href'])
-
-            fighters = sorted(set(fighters))
-
-            for fighter in fighters:
-                data = requests.get(fighter)
-                soup = BeautifulSoup(data.text, 'html.parser')
-                time.sleep(2)
+            time.sleep(1)            
 
             fighters = soup.find_all('p', {'class': "btmarket__name"})
             c = fighters[0].text.strip()

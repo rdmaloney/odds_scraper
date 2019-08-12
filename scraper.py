@@ -21,7 +21,7 @@ f2_odds = []
 def scrape_data():
     data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
     soup = BeautifulSoup(data.text, 'html.parser')
-    links = soup.find_all('a',{'class': 'btmarket__name btmarket__name--featured'} href=True)
+    links = soup.find_all('a',{'class': 'btmarket__name btmarket__name--featured'}, href=True)
 
     for link in links:
         

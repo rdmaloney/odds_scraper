@@ -21,7 +21,7 @@ def scrape_data():
 
     table = soup.find('table', {"class": "at-12 standard-list"})
 
-    rows = soup.find_all('tr')[1:]
+    rows = soup.find_all('tr')
 
     for row in rows:
         print(f"Now currently scraping row: {row}")

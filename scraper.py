@@ -42,14 +42,14 @@ def scrape_data():
                 soup = BeautifulSoup(data.text, 'html.parser')
                 time.sleep(2)
 
-            fighters = soup.find('p', {'class': "btmarket__name"})
+            fighters = soup.find_all('p', {'class': "btmarket__name"})
             c = fighters[0].text.strip()
             d = fighters[1].text.strip()
 
             f1.append(c)
             f2.append(d)
 
-            odds = soup.find('button', {'class': "btn betbutton oddsbutton"})
+            odds = soup.find_all('button', {'class': "btn betbutton oddsbutton"})
 
             a = odds[0].text.strip()
             b = odds[1].text.strip()

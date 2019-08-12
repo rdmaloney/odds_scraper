@@ -24,6 +24,7 @@ def scrape_data():
     rows = soup.find_all('tr')[1:]
 
     for row in rows:
+        print(f"Now currently scraping row: {row}")
 
         fighters = row.find_all('p', {"class": "fixtures-bet-name beta-footnote"})
 

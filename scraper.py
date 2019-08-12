@@ -13,37 +13,33 @@ f1 = []
 f2 = []
 f1_odds = []
 f2_odds = []
-header = []
-table_div = []
-top = []
-fighter = []
 
 
 def scrape_data():
-    # set up page to extract table
     data = requests.get("https://www.oddschecker.com/ufc-mma")
     soup = BeautifulSoup(data.text, 'html.parser')
 
-    h1 = soup.find('h1')
-    header.append(h1.text)
+    table = soup.find('table', {"class": "at-12 standard-list"})
 
-    table_div = soup.find('div', {'class': 'with-rhc'})
+    rows = soup.find_all('tr')[1:]
 
-    fighter = table_div.find_all('td', {'class': 'all-odds-click'})
+    for row in rows:
 
-    c = fighter[0].text.strip()
-    d = fighter[1].text.strip()
+        fighters = row.find_all('p', {"class": "fixtures-bet-name beta-footnote"})
 
-    f1.append(c)
-    f2.append(d)
+        c = fighters[0].text.strip()
+        d = fighters[1].text.strip()
 
-    odds = table.find_all('td', {'class': 'basket-add'})
+        f1.append(c)
+        f2.append(d)
 
-    a = odds[0].text.strip()
-    b = odds[1].text.strip()
+        odds = row.find_all('span', {'class': "odds beta-footnote bold add-to-bet-basket"})
 
-    f1_odds.append(a)
-    f2_odds.append(b)
+        a = odds[0].text.strip()
+        b = odds[1].text.strip()
+
+        f1_odds.append(a)
+        f2_odds.append(b)
 
     return None
 

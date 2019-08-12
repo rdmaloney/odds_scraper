@@ -29,7 +29,7 @@ def scrape_data():
         
         fighters = []
 
-        fighters = row.find_all('p', {"class": "fixtures-bet-name beta-footnote"})
+        fighters = table.find_all('p', {"class": "fixtures-bet-name beta-footnote"})
 
         c = fighters[0].text.strip()
         d = fighters[1].text.strip()
@@ -37,7 +37,7 @@ def scrape_data():
         f1.append(c)
         f2.append(d)
 
-        odds = row.find_all('span', {'class': "odds beta-footnote bold add-to-bet-basket"})
+        odds = table.find_all('span', {'class': "odds beta-footnote bold add-to-bet-basket"})
 
         a = odds[0].text.strip()
         b = odds[1].text.strip()

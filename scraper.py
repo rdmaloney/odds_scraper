@@ -1,6 +1,12 @@
 import requests
+import pandas as pd
+import numpy as np
+import sqlite3
 from bs4 import BeautifulSoup
 import string
+import re
+import os
+import time
 from math import *
 
 links = []

@@ -1,13 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
-import numpy as np
 import string
-import re
-import datetime
-import sqlite3
-import time
-import os
+from math import *
 
 links = []
 alphabets = sorted(set(string.ascii_lowercase))
@@ -17,39 +11,28 @@ f2 = []
 f1_odds = []
 f2_odds = []
 
+def safe_eval(expr):
+    try:
+        return round(eval(expr),2)
+    except:
+        return expr
 
 def scrape_data():
     data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
     soup = BeautifulSoup(data.text, 'html.parser')
-    links = soup.find_all('a',{'class': 'btmarket__name btmarket__name--featured'}, href=True)
-
-    for link in links:
+    divs = soup.findAll("div", {"class": "event"})
+    for div in divs:
+        link = div.findAll('a')[0]
+        names = link.findAll('span')
+        f1 = names[0].text
+        f2 = names[1].text
+        buttons_having_odds = div.findAll('button')
+        f1_odds = safe_eval(buttons_having_odds[0]["data-odds"])
+        f2_odds = safe_eval(buttons_having_odds[1]["data-odds"])
         
-        links.append(link.get('href'))
 
-        for link in links:
-            print(f"Now currently scraping link: {link}")
 
-            data = requests.get(link)
-            soup = BeautifulSoup(data.text, 'html.parser')
-            time.sleep(1)            
-
-            fighters = soup.find_all('p', {'class': "btmarket__name"})
-            c = fighters[0].text.strip()
-            d = fighters[1].text.strip()
-
-            f1.append(c)
-            f2.append(d)
-
-            odds = soup.find_all('span', {'class': "betbutton_odds"})
-
-            a = odds[0].text.strip()
-            b = odds[1].text.strip()
-
-            f1_odds.append(a)
-            f2_odds.append(b)
-
-        return None
+scrape_data()
 
     def create_df():
         df = pd.DataFrame()

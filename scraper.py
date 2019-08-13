@@ -32,15 +32,17 @@ def scrape_data():
     for div in divs:
         link = div.findAll('a')[0]
         names = link.findAll('span')
-        f1 = names[0].text
-        f2 = names[1].text
+        p1 = names[0].text
+        p2 = names[1].text
         buttons_having_odds = div.findAll('button')
-        f1_odds = safe_eval(buttons_having_odds[0]["data-odds"])
-        f2_odds = safe_eval(buttons_having_odds[1]["data-odds"])
-
+        p1_odds = safe_eval(buttons_having_odds[0]["data-odds"])
+        p2_odds = safe_eval(buttons_having_odds[1]["data-odds"])
+        f1.append(p1)
+        f2.append(p2)
+        f1_odds.append(p1_odds)
+        f2_odds.append(p2_odds)
 
 scrape_data()
-
 
 def create_df():
     df = pd.DataFrame()

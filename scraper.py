@@ -44,8 +44,8 @@ def scrape_data():
         p1 = names[0].text
         p2 = names[1].text
         buttons_having_odds = div.findAll('button')
-        p1_odds_frac = frac(buttons_having_odds[0]["data-odds"]))
-        p2_odds-frac = frac((buttons_having_odds[1]["data-odds"]))
+        p1_odds_frac = frac(buttons_having_odds[0]["data-odds"])
+        p2_odds-frac = frac((buttons_having_odds[1]["data-odds"])
         p1_odds = Fraction(p1_odds_frac)
         p2_odds = Fraction(p2_odds_frac)
         f1.append(p1)

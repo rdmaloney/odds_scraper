@@ -8,6 +8,7 @@ import re
 import os
 import time
 from math import *
+from fractions import Fraction
 
 links = []
 alphabets = sorted(set(string.ascii_lowercase))
@@ -35,8 +36,8 @@ def scrape_data():
         p1 = names[0].text
         p2 = names[1].text
         buttons_having_odds = div.findAll('button')
-        p1_odds = buttons_having_odds[0]["data-odds"]
-        p2_odds = buttons_having_odds[1]["data-odds"]
+        p1_odds = Fraction(buttons_having_odds[0]["data-odds"])
+        p2_odds = Fraction(buttons_having_odds[1]["data-odds"])
         f1.append(p1)
         f2.append(p2)
         f1_odds.append(p1_odds)

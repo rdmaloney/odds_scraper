@@ -24,14 +24,17 @@ def safe_eval(expr):
         return round(eval(expr), 2)
     except:
         return expr
-    
-def frac (express):
+
+
+def frac(express):
     if express == 'EVS':
-       
-       express='1/1'
+
+        express = '1/1'
     else:
-        
+
         return express
+
+
 
 
 def scrape_data():
@@ -45,7 +48,7 @@ def scrape_data():
         p2 = names[1].text
         buttons_having_odds = div.findAll('button')
         p1_odds_frac = frac(buttons_having_odds[0]["data-odds"])
-        p2_odds-frac = frac((buttons_having_odds[1]["data-odds"])
+        p2_odds_frac = frac(buttons_having_odds[1]["data-odds"])
         p1_odds = Fraction(p1_odds_frac)
         p2_odds = Fraction(p2_odds_frac)
         f1.append(p1)
@@ -53,7 +56,8 @@ def scrape_data():
         f1_odds.append(p1_odds)
         f2_odds.append(p2_odds)
 
-scrape_data()
+        scrape_data()
+
 
 def create_df():
     df = pd.DataFrame()

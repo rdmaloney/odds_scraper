@@ -24,6 +24,14 @@ def safe_eval(expr):
         return round(eval(expr), 2)
     except:
         return expr
+    
+def frac (expres)
+    try:
+    if express = 'EVS'
+        express='1/1'
+    except:
+        
+        return express
 
 
 def scrape_data():

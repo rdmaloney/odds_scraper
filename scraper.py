@@ -25,7 +25,7 @@ def safe_eval(expr):
     except:
         return expr
     
-def frac (express)
+def frac (express):
     try:
     if express = 'EVS'
         express='1/1'

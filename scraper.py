@@ -8,7 +8,6 @@ import re
 import os
 import time
 from math import *
-from fractions import Fraction
 
 links = []
 alphabets = sorted(set(string.ascii_lowercase))

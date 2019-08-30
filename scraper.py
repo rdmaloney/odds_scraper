@@ -29,10 +29,12 @@ def safe_eval(expr):
 def frac(express):
     if express == 'EVS':
 
-       return express == '1/1'
+        return express == '1'
     else:
-
-        return express
+        tokens = express.split('/')
+        t1 = int(tokens[0])
+        t2 = int(tokens[1])
+        return t1 / t2
 
 
 

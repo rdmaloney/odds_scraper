@@ -24,18 +24,6 @@ def safe_eval(expr):
     except:
         return expr
     
-def frac(express):
-    if express == 'EVS':
-
-        return '1'
-    else:
-        tokens = express.split('/')
-        t1 = int(tokens[0])
-        t2 = int(tokens[1])
-        return str(t1 / t2)
-
-
-
 def scrape_data():
     data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
     soup = BeautifulSoup(data.text, 'html.parser')

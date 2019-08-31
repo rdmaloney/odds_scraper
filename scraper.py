@@ -17,6 +17,15 @@ f2 = []
 f1_odds = []
 f2_odds = []
 
+def frac(express):
+    if express == 'EVS':
+
+        return '1'
+    else:
+        tokens = express.split('/')
+        t1 = int(tokens[0])
+        t2 = int(tokens[1])
+        return str(t1 / t2)
 
 def safe_eval(expr):
     try:

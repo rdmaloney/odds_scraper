@@ -18,10 +18,22 @@ f1_odds = []
 f2_odds = []
 
 
+def frac(express):
+    if express == 'EVS':
+        return '1'
+    else:
+        tokens = express.split('/')
+        t1 = int(tokens[0])
+        t2 = int(tokens[1])
+
+        return str(round(t1 / t2, 2))
+
+
 def safe_eval(expr):
     try:
         return round(eval(expr), 2)
     except:
+
         return expr
 
 
@@ -35,14 +47,13 @@ def scrape_data():
         p1 = names[0].text
         p2 = names[1].text
         buttons_having_odds = div.findAll('button')
-        p1_odds = buttons_having_odds[0]["data-odds"]
-        p2_odds = buttons_having_odds[1]["data-odds"]
+        p1_odds = frac(buttons_having_odds[0]["data-odds"])
+        p2_odds = frac(buttons_having_odds[1]["data-odds"])
         f1.append(p1)
         f2.append(p2)
         f1_odds.append(p1_odds)
         f2_odds.append(p2_odds)
 
-scrape_data()
 
 def create_df():
     df = pd.DataFrame()
@@ -56,6 +67,7 @@ def create_df():
 
 scrape_data()
 df = create_df()
+print(df.size)
 
 conn = sqlite3.connect('data.sqlite')
 df.to_sql('data', conn, if_exists='replace')

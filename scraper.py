@@ -39,6 +39,7 @@ def safe_eval(expr):
 
 def scrape_data():
     data = requests.get("https://sports.williamhill.com/betting/en-gb/ufc")
+    print(data.text)
     soup = BeautifulSoup(data.text, 'html.parser')
     divs = soup.findAll("div", {"class": "event"})
     for div in divs:
